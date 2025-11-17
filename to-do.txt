@@ -1,0 +1,7 @@
+- Dar check na página das classificações (mas penso que esteja tudo)
+- IMPORTANTE: VARIAVEIS PAGINA INICIAL E CLASSIFICACOES ESTÃO EM INGLES, TROCAR
+- Verificar titulos com capslock, outros sem, verificar pequenos erros por toda a pagina em conformidade de umas com outras, icones...
+- Realizar a página de um clube e depois copiar a mesma para os restantes
+- Entrega será classificações, Favoritos (não funcional ainda talvez), Pagina Inicial e Pagina de um Clube
+- Corrigir (DB), posições trocadas, nomes trocados, ...
+- Corrigir tabela classificativa da pagina-inicial

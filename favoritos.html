@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favoritos - Vive Distrital</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Font Awesome (para ícone estrela no topo dos favoritos) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #0D0D0D;
+      --panel: #151515;
+      --surface: #1A1A1A;
+      --accent: #f1c40f;
+      --muted: #888;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: white;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .sidebar {
+      background-color: var(--panel);
+      padding: 2rem 1.5rem;
+      height: 100vh;
+      position: fixed;
+      width: 240px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    .sidebar h1 {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .nav-link {
+      color: #ccc;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar .nav-link:hover {
+      background-color: #222;
+      color: #fff;
+    }
+
+    .sidebar .favorites-label {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 2rem;
+    }
+
+    .top-bar {
+      background-color: var(--surface);
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      padding: 1rem 1.5rem;
+    }
+
+    .search-box input {
+      background-color: #2a2a2a;
+      border: none;
+      border-radius: 20px;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      width: 100%;
+    }
+
+    .notification-btn {
+      background-color: #2a2a2a;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      color: white;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: var(--accent);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: bold;
+      border-radius: 999px;
+      padding: 2px 6px;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #dab10e;
+    }
+
+    .club-card {
+      background-color: var(--surface);
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .club-card:hover {
+      background-color: #2a2a2a;
+    }
+
+    .club-card img {
+      height: 32px;
+      margin-right: 8px;
+    }
+
+    .club-card span {
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .fa-star {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    .match-card {
+      background-color: var(--surface);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      padding: 1rem 1.5rem;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .match-card:hover {
+      background-color: #2a2a2a;
+    }
+
+    .match-card .equipa-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .match-card .equipa-row img {
+      height: 28px;
+    }
+
+    .match-card .resultado {
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1><img src="imgs/logos/Logo-ViveDistrital-LetrasBrancas.png" alt="Logo" width="180"></h1>
+    <nav class="nav flex-column gap-2">
+      <a href="pagina-inicial.html" class="nav-link"><span class="material-symbols-outlined">home</span>Página Inicial</a>
+      <a href="classificacoes.html" class="nav-link"><span class="material-symbols-outlined">bar_chart</span>Classificações</a>
+      <a href="favoritos.html" class="nav-link"><span class="material-symbols-outlined">star</span>Favoritos</a>
+      <a href="noticias.html" class="nav-link"><span class="material-symbols-outlined">article</span>Notícias</a>
+
+      <p class="favorites-label">Clubes Favoritos</p>
+      <a href="#" class="nav-link"><span class="material-symbols-outlined">sports_soccer</span>Académica SF</a>
+      <a href="#" class="nav-link"><span class="material-symbols-outlined">sports_soccer</span>Sourense</a>
+      <a href="#" class="nav-link"><span class="material-symbols-outlined">sports_soccer</span>Nogueirense</a>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Top Bar -->
+    <div class="top-bar d-flex justify-content-between align-items-center flex-wrap gap-3">
+      <div class="search-box flex-grow-1">
+        <input type="text" placeholder="Pesquise pela equipa...">
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <button class="notification-btn" title="Notificações">
+          <i class="fas fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary">Login</button>
+          <button class="btn btn-primary">Criar conta</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Favoritos no Topo -->
+    <div class="row g-3 mb-4 club-list">
+      <div class="col-md-3">
+        <div class="club-card d-flex justify-content-between align-items-center">
+          <div><img src="imgs/equipas/nogueirense.png" alt="Nogueirense"><span>Nogueirense</span></div>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="club-card d-flex justify-content-between align-items-center">
+          <div><img src="imgs/equipas/aac-sf.png" alt="Académica SF"><span>Académica SF</span></div>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="club-card d-flex justify-content-between align-items-center">
+          <div><img src="imgs/equipas/sourense.png" alt="Sourense"><span>Sourense</span></div>
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Últimas Partidas -->
+    <h4 class="mb-3">ÚLTIMAS PARTIDAS</h4>
+
+    <div class="match-card d-flex justify-content-between align-items-center">
+      <div class="equipa-row"><img src="imgs/equipas/nogueirense.png"><span>Nogueirense</span></div>
+      <span class="resultado">0 - 0</span>
+      <div class="equipa-row"><img src="imgs/equipas/uniaocoimbra.png"><span>União 1919</span></div>
+    </div>
+
+    <div class="match-card d-flex justify-content-between align-items-center">
+      <div class="equipa-row"><img src="imgs/equipas/aac-sf.png"><span>Académica SF</span></div>
+      <span class="resultado">2 - 1</span>
+      <div class="equipa-row"><img src="imgs/equipas/eirense.png"><span>Eirense</span></div>
+    </div>
+
+    <div class="match-card d-flex justify-content-between align-items-center">
+      <div class="equipa-row"><img src="imgs/equipas/sourense.png"><span>Sourense</span></div>
+      <span class="resultado">5 - 1</span>
+      <div class="equipa-row"><img src="imgs/equipas/pedrulhense.png"><span>Pedrulhense</span></div>
+    </div>
+
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
