@@ -1,0 +1,162 @@
+:root {
+  --bs-body-bg: #0D0D0D;
+  --bs-body-color: #FFFFFF;
+  --bs-tertiary-bg: #1A1A1A;
+  --primary-accent: #f1c40f;
+  --sidebar-bg: #151515;
+}
+
+body {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.icone {
+  font-family: "Material Symbols Outlined";
+  font-size: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  padding: 2rem 1.5rem;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 240px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar h1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.sidebar h1 img {
+  max-width: 200px;
+  width: 100%;
+}
+
+.sidebar .nav-link {
+  color: #CCCCCC;
+  border-radius: 6px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #222222;
+  color: #FFFFFF;
+}
+
+.sidebar .favorites-label {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #888888;
+  padding-left: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: var(--bs-tertiary-bg);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+}
+
+.search-box {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.search-box input {
+  width: 100%;
+  background-color: #2a2a2a;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 0.5rem 1rem;
+}
+
+.search-box input::placeholder {
+  color: #888;
+}
+
+.notification-btn {
+  width: 44px;
+  height: 36px;
+  border-radius: 20px;
+  background-color: #2a2a2a;
+  border: none;
+  color: white;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--primary-accent);
+  color: black;
+  font-size: 0.65rem;
+  padding: 2px 5px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background-color: var(--primary-accent);
+  color: #000;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #dab10e;
+}
+
+.main-content {
+  margin-left: 240px;
+  padding: 2rem;
+}
+
+.card-noticia {
+  background-color: #1A1A1A;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.card-noticia:hover {
+  transform: scale(1.02);
+}
+
+.card-noticia p {
+  color: #aaa;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1rem;
+  }
+}

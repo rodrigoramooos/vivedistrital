@@ -1,0 +1,61 @@
+.cabecalho-clube {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cabecalho-clube img {
+  width: 64px;
+  height: 64px;
+}
+
+.estadio-info {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 0.25rem;
+}
+
+.info-bloco {
+  margin-top: 2rem;
+}
+
+.info-bloco h6 {
+  color: var(--primary-accent);
+  margin-bottom: 0.5rem;
+}
+
+.info-bloco p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.estatisticas-jogo {
+  margin-top: 2rem;
+}
+
+.estatistica-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.grafico-estatistica {
+  height: 10px;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.grafico-estatistica .parte {
+  height: 100%;
+}
+
+.parte.amarelo {
+  background-color: var(--primary-accent);
+}
+
+.parte.azul {
+  background-color: #1e6aff;
+}

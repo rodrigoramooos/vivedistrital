@@ -1,0 +1,70 @@
+.match-card {
+  background-color: var(--surface);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.match-card:hover {
+  background-color: #2a2a2a;
+}
+
+.match-card .equipa-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.match-card .equipa-row img {
+  height: 28px;
+}
+
+.match-card .resultado {
+  font-weight: bold;
+}
+
+.match-card {
+  background-color: #2a2a2a !important;
+}
+
+.club-card {
+  background-color: var(--surface);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.club-card:hover {
+  background-color: #2a2a2a;
+}
+
+.club-card img {
+  height: 32px;
+  margin-right: 8px;
+}
+
+.club-card span {
+  font-weight: bold;
+  color: #fff;
+}
+
+.club-card {
+  background-color: #2a2a2a !important;
+}
+
+.favorite-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
