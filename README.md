@@ -1,2 +1,1 @@
-# vivedistrital
-Repositório para o projeto da unidade curricular Desenvolvimento Web
+Repositório para o projeto final da unidade curricular de Desenvolvimento para Web

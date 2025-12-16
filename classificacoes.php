@@ -1,0 +1,233 @@
+<?php
+header('Content-Type: text/html; charset=utf-8');
+require_once 'includes/config.php';
+require_once 'config-clubes.php';
+
+$pageTitle = 'Classificações';
+
+// Obter todos os clubes ordenados
+$clubes = getClubes();
+
+include 'includes/header.php';
+include 'includes/sidebar.php';
+?>
+
+<style>
+  .card {
+    background-color: #1A1A1A;
+    border: none;
+    border-radius: 12px;
+  }
+
+  .card-header {
+    background-color: transparent;
+    border: none;
+    padding: 1.5rem 1.5rem 0 1.5rem;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    color: #FFFFFF;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .table-dark {
+    color: #FFFFFF;
+    background-color: transparent !important;
+  }
+
+  .table-dark thead th {
+    color: #888888;
+    border-bottom: 1px solid #333;
+    font-size: 0.8rem;
+    background-color: transparent !important;
+  }
+
+  .table-dark tbody tr {
+    background-color: transparent !important;
+  }
+
+  .table-dark tbody td {
+    color: #FFFFFF;
+    border-bottom: 1px solid #2b2b2b;
+    font-size: 0.9rem;
+    background-color: transparent !important;
+  }
+
+  .table-dark tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  .table-dark tbody tr:nth-child(1) {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-left: 4px solid #FFD700;
+  }
+
+  .table-dark tbody tr:nth-child(2) {
+    background-color: rgba(82, 187, 56, 0.12);
+    border-left: 4px solid #8ca044;
+  }
+
+  .table-dark tbody tr:nth-child(14) {
+    background-color: rgba(255, 174, 74, 0.12);
+    border-left: 4px solid #FF8C00;
+  }
+
+  .table-dark tbody tr:nth-child(15),
+  .table-dark tbody tr:nth-child(16) {
+    background-color: rgba(255, 80, 80, 0.12);
+    border-left: 4px solid #E53935;
+  }
+
+  .equipa-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .equipa-row:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+
+  .equipa-row img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .forma {
+    display: flex;
+    gap: 0.3rem;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .forma span {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .vitoria {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  .empate {
+    background-color: #FFC107;
+    color: #000;
+  }
+
+  .derrota {
+    background-color: #F44336;
+    color: white;
+  }
+
+  .nao-jogado {
+    background-color: #666666;
+    color: #FFFFFF;
+  }
+</style>
+
+<div class="main-content">
+  <!-- Barra Superior -->
+  <?php include 'includes/topbar.php'; ?>
+
+  <!-- Classificação Completa -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title"><span class="icone">emoji_events</span>Classificação - Campeonato Distrital</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-dark mb-0">
+          <thead>
+            <tr>
+              <th style="width: 60px;">Pos</th>
+              <th>Equipa</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GM</th>
+              <th>GS</th>
+              <th>DG</th>
+              <th>Pts</th>
+              <th>Forma</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php 
+            $posicao = 1;
+            foreach ($clubes as $clube): 
+              $golos_m = $clube['golos_marcados'] ?? 0;
+              $golos_s = $clube['golos_sofridos'] ?? 0;
+              $diferenca = $golos_m - $golos_s;
+              $diferenca_texto = ($diferenca > 0 ? '+' : '') . $diferenca;
+            ?>
+            <tr>
+              <td><?= $posicao ?>º</td>
+              <td>
+                <a href="<?= url('clube-detalhe.php?id=' . e($clube['codigo'])) ?>" class="equipa-row">
+                  <img src="<?= url(e($clube['logo'])) ?>" onerror="this.src='<?= url('imgs/equipas/default.png') ?>'">
+                  <span><?= e($clube['nome']) ?></span>
+                </a>
+              </td>
+              <td><?= $clube['jogos'] ?? 0 ?></td>
+              <td><?= $clube['vitorias'] ?? 0 ?></td>
+              <td><?= $clube['empates'] ?? 0 ?></td>
+              <td><?= $clube['derrotas'] ?? 0 ?></td>
+              <td><?= $golos_m ?></td>
+              <td><?= $golos_s ?></td>
+              <td><?= $diferenca_texto ?></td>
+              <td><strong><?= $clube['pontos'] ?? 0 ?></strong></td>
+              <td><?= formatarForma($clube['forma'] ?? '') ?></td>
+            </tr>
+            <?php 
+              $posicao++;
+            endforeach; 
+            ?>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Legenda -->
+      <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #333; display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; font-size: 0.85rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 16px; height: 16px; background-color: #FFD700; display: inline-block; border-radius: 3px;"></span>
+          <span style="color: #CCCCCC;">Campeão / Subida Divisão</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 16px; height: 16px; background-color: #8ca044; display: inline-block; border-radius: 3px;"></span>
+          <span style="color: #CCCCCC;">Qualificação Taça Portugal</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 16px; height: 16px; background-color: #FF8C00; display: inline-block; border-radius: 3px;"></span>
+          <span style="color: #CCCCCC;">Playoff Despromoção</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 16px; height: 16px; background-color: #E53935; display: inline-block; border-radius: 3px;"></span>
+          <span style="color: #CCCCCC;">Descida Divisão</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php include 'includes/footer.php'; ?>
