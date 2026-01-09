@@ -1,4 +1,3 @@
-<!-- Barra Lateral -->
 <div class="sidebar">
   <h1><img src="<?php echo url('imgs/logos/Logo-ViveDistrital-LetrasBrancas.png'); ?>" alt="Logo Vive Distrital"></h1>
   
@@ -17,10 +16,8 @@
     </a>
     
     <?php if (isLoggedIn()): ?>
-      <?php 
-      $loggedUser = getLoggedUser();
-      if ($loggedUser && $loggedUser['clube_favorito_id']): 
-      ?>
+      <?php $loggedUser = getLoggedUser(); ?>
+      <?php if ($loggedUser && $loggedUser['clube_favorito_id']): ?>
         <p class="favorites-label">Clube Favorito</p>
         <a href="<?php echo url('clube-detalhe.php?id=' . $loggedUser['clube_favorito_codigo']); ?>" class="nav-link">
           <span class="icone">sports_soccer</span><?php echo htmlspecialchars($loggedUser['clube_favorito_nome']); ?>

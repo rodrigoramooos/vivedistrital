@@ -1,0 +1,492 @@
+.admin-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.admin-header {
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+    color: #000;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(241, 196, 15, 0.3);
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.admin-header p {
+    margin: 0.5rem 0 0 0;
+    opacity: 0.8;
+    color: #000;
+}
+
+.stat-card {
+    background-color: #1A1A1A;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card .icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.stat-card .icon.yellow {
+    background-color: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+}
+
+.stat-card .icon.blue {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.stat-card .icon.green {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.stat-card .icon.red {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f1c40f;
+    margin: 0;
+}
+
+.stat-card p {
+    color: #888;
+    margin: 0.5rem 0 0 0;
+}
+
+.quick-actions {
+    background-color: #1A1A1A;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #333;
+}
+
+.quick-actions h4 {
+    color: #f1c40f;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quick-actions .btn {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f1c40f;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+}
+
+.back-link:hover {
+    color: #f39c12;
+    gap: 0.75rem;
+}
+
+.clube-card {
+    background: #1A1A1A;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.clube-card:hover {
+    border-color: #f1c40f;
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.2);
+}
+
+.clube-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
+}
+
+.clube-header img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.clube-header h3 {
+    color: #f1c40f;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: #f1c40f;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    color: #f1c40f;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.form-control,
+.form-select {
+    background: #0D0D0D;
+    border: 1px solid #444;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background: #0D0D0D;
+    border-color: #f1c40f;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(241, 196, 15, 0.25);
+    outline: none;
+}
+
+.jogo-card {
+    background: #1A1A1A;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.jogo-card:hover {
+    border-color: #f1c40f;
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.2);
+}
+
+.jogo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #333;
+}
+
+.jogo-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.jogo-info img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.jogo-info .versus {
+    color: #888;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-agendado {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.status-finalizado {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-adiado {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.status-badge {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-agendado {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.status-finalizado,
+.status-realizado {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-adiado,
+.status-cancelado {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+.versus {
+    color: #f1c40f;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.jogo-detalhes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-add-jogo {
+    background: #27ae60;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.btn-add-jogo:hover {
+    background: #2ecc71;
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.btn-save {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-save:hover {
+    background: #229954;
+    transform: translateY(-2px);
+}
+
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-delete:hover {
+    background: #c0392b;
+}
+
+.btn-voltar {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+}
+
+.btn-voltar:hover {
+    background: #3a3a3a;
+    color: #f1c40f;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.user-table thead th {
+    background: #2a2a2a;
+    color: #f1c40f;
+    padding: 15px;
+    text-align: left;
+    font-weight: 700;
+    border: none;
+}
+
+.user-table tbody tr {
+    background: #1A1A1A;
+    transition: all 0.3s ease;
+}
+
+.user-table tbody tr:hover {
+    background: #242424;
+    transform: scale(1.01);
+}
+
+.user-table tbody td {
+    padding: 15px;
+    border: none;
+}
+
+.badge {
+    padding: 0.35rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.badge-secondary {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.alert-success {
+    background: rgba(46, 204, 113, 0.2);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+}
+
+.alert-danger {
+    background: rgba(231, 76, 60, 0.2);
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+}
+
+.table-container {
+    background-color: #1A1A1A;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #333;
+}
+
+.table-container h4 {
+    color: #f1c40f;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.table {
+    color: white;
+}
+
+.table thead {
+    border-bottom: 2px solid #333;
+}
+
+.table th {
+    color: #f1c40f;
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+}
+
+.table td {
+    padding: 1rem;
+    border-color: #2a2a2a;
+}
+
+.table tbody tr:hover {
+    background-color: #222;
+}
+
+.badge-admin {
+    background-color: #e74c3c;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-user {
+    background-color: #3498db;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}

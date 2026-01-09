@@ -2,218 +2,8 @@
 header('Content-Type: text/html; charset=utf-8');
 require_once 'includes/config.php';
 
-// Configurações da página
 $pageTitle = 'Página Inicial';
 $pageCSS = 'css/pagina-inicial.css';
-$additionalStyles = "
-  .jogo-destaque {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  .jogo-destaque .card {
-    height: 100%;
-  }
-
-  .jogo-destaque .card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .score-display {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .score-display img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-  }
-
-  .resultado {
-    background-color: #333;
-    padding: 0.3rem 1rem;
-    border-radius: 12px;
-    font-weight: bold;
-  }
-
-  .stat-bar {
-    display: flex;
-    height: 22px;
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: #2c2c2c;
-    margin-bottom: 0.75rem;
-  }
-
-  .stat-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: bold;
-  }
-
-  .stat-amarelo {
-    background-color: var(--primary-accent);
-    color: #000;
-  }
-
-  .stat-azul {
-    background-color: #1e6aff;
-    color: #fff;
-  }
-
-  .table-dark {
-    color: #FFFFFF;
-  }
-
-  .table-dark thead th {
-    color: #888888;
-    border-bottom: 1px solid #333;
-    font-size: 0.8rem;
-  }
-
-  .table-dark tbody tr {
-    background-color: transparent;
-  }
-
-  .table-dark tbody td {
-    color: #FFFFFF;
-    border-bottom: 1px solid #2b2b2b;
-    font-size: 0.9rem;
-  }
-
-  .table-dark tbody tr:hover {
-    background-color: #222;
-  }
-
-  .tabela-classificacao.table-dark tbody tr:nth-child(1) {
-    background-color: rgba(255, 215, 0, 0.1);
-    border-left: 4px solid #FFD700;
-  }
-
-  .tabela-classificacao.table-dark tbody tr:nth-child(2) {
-    background-color: rgba(82, 187, 56, 0.12);
-    border-left: 4px solid #8ca044;
-  }
-
-  .posicao {
-    font-weight: bold;
-    width: 60px;
-    text-align: left;
-    padding-left: 0.5rem;
-  }
-
-  .equipa-row {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .equipa-row:hover {
-    opacity: 0.8;
-    transform: scale(1.02);
-  }
-
-  .equipa-row img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-  }
-
-  .legenda-classificacao {
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-  }
-
-  .legenda-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #CCCCCC;
-    font-size: 0.9rem;
-  }
-
-  .legenda-marker {
-    width: 14px;
-    height: 14px;
-    display: inline-block;
-    border-radius: 3px;
-    border: 1px solid rgba(0,0,0,.2);
-  }
-
-  .legenda-marker.ouro { background: #FFD700; }
-  .legenda-marker.prata { background: #8ca044; }
-
-  .nav-tabs {
-    border-bottom: 1px solid #333;
-  }
-
-  .nav-tabs .nav-link {
-    color: #CCCCCC;
-    border: none;
-    border-bottom: 2px solid transparent;
-  }
-
-  .nav-tabs .nav-link.active {
-    background-color: transparent;
-    color: var(--primary-accent);
-    border-bottom-color: var(--primary-accent);
-  }
-
-  .nav-tabs .nav-link:hover {
-    color: #FFFFFF;
-    border-bottom-color: transparent;
-  }
-
-  .btn-ver-mais {
-    background: none;
-    border: 1px solid rgba(241,196,15,0.15);
-    color: var(--primary-accent);
-    padding: 0.35rem 0.75rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    transition: background 0.15s, color 0.15s;
-    text-decoration: none;
-  }
-
-  .btn-ver-mais:hover {
-    background-color: rgba(241,196,15,0.08);
-    color: #fff;
-  }
-
-  @media (max-width: 768px) {
-    .sidebar {
-      position: static;
-      width: 100%;
-      height: auto;
-    }
-    .main-content {
-      margin-left: 0;
-      padding: 1rem;
-    }
-    .search-box {
-      width: 100%;
-    }
-    .jogo-destaque {
-      width: 100%;
-      margin-top: 1rem;
-    }
-  }
-";
 
 include 'includes/header.php';
 include 'includes/sidebar.php';
@@ -223,7 +13,6 @@ include 'includes/sidebar.php';
 
     <?php include 'includes/topbar.php'; ?>
 
-    <!-- Banner + Jogo em Destaque -->
     <div class="row mb-4 g-3">
       <div class="col-lg-8">
         <img src="<?php echo url('imgs/logos/banner-ecra-principal.png'); ?>" alt="Banner" class="img-fluid rounded" style="width: 100%;">
@@ -281,7 +70,6 @@ include 'includes/sidebar.php';
     </div>
 
     <div class="tab-content">
-      <!-- Jogos Recentes -->
       <div class="tab-pane fade show active" id="recentes" role="tabpanel" aria-labelledby="recentes-tab">
         <div class="table-responsive">
           <table class="table table-dark table-hover">
@@ -335,7 +123,6 @@ include 'includes/sidebar.php';
         </div>
       </div>
 
-      <!-- Próximos Jogos -->
       <div class="tab-pane fade" id="proximos" role="tabpanel" aria-labelledby="proximos-tab">
         <div class="table-responsive">
           <table class="table table-dark table-hover">
@@ -377,7 +164,6 @@ include 'includes/sidebar.php';
     </div>
   </div>
 
-  <!-- Classificação -->
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
       <h5 class="card-title mb-0"><span class="icone">emoji_events</span>Classificação</h5>
@@ -432,7 +218,6 @@ include 'includes/sidebar.php';
         </table>
       </div>
 
-      <!-- Legenda -->
       <div class="legenda-classificacao">
         <div class="legenda-item"><span class="legenda-marker ouro"></span><small>Campeão e Subida Divisão</small></div>
         <div class="legenda-item"><span class="legenda-marker prata"></span><small>Qualificação Taça Portugal</small></div>
@@ -441,4 +226,6 @@ include 'includes/sidebar.php';
   </div>
 </div>
 
-<?php include 'includes/footer.php'; ?>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

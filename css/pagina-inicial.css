@@ -1,26 +1,17 @@
-.card {
-  background-color: #1E1E1E;
-  border: none;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  box-shadow: none;
-}
-
-.card.mt-4 {
-  margin-top: 2rem;
-}
-
-.card-title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-}
-
 .jogo-destaque {
-  width: 340px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.jogo-destaque .card {
+  height: 100%;
+}
+
+.jogo-destaque .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .score-display {
@@ -70,56 +61,6 @@
   color: #fff;
 }
 
-.table-dark {
-  background-color: #1E1E1E;
-}
-
-.table-dark thead th {
-  color: #666;
-  border-bottom: 1px solid #2a2a2a;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.75rem 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background-color: #1E1E1E;
-}
-
-.table-dark tbody td {
-  color: white;
-  border-bottom: 1px solid #2a2a2a;
-  font-size: 0.9rem;
-  padding: 0.875rem 1rem;
-  background-color: #1E1E1E;
-}
-
-.table-dark tbody tr {
-  background-color: #1E1E1E;
-}
-
-.table-dark tbody tr:hover {
-  background-color: #252525;
-}
-
-.equipa-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: inherit;
-  text-decoration: none;
-}
-
-.equipa-row:hover {
-  opacity: 0.8;
-  transform: scale(1.02);
-}
-
-.equipa-row img {
-  width: 28px;
-  height: 28px;
-  object-fit: contain;
-}
-
 .btn-ver-mais {
   background: none;
   border: 1px solid rgba(241,196,15,0.15);
@@ -128,6 +69,7 @@
   border-radius: 8px;
   font-size: 0.9rem;
   text-decoration: none;
+  transition: background 0.15s, color 0.15s;
 }
 
 .btn-ver-mais:hover {
@@ -135,7 +77,55 @@
   color: #fff;
 }
 
-/* Espaço extra entre blocos de Jogos e Classificação */
+.tabela-classificacao.table-dark tbody tr:nth-child(1) {
+  background-color: rgba(255, 215, 0, 0.1);
+  border-left: 4px solid #FFD700;
+}
+
+.tabela-classificacao.table-dark tbody tr:nth-child(2) {
+  background-color: rgba(82, 187, 56, 0.12);
+  border-left: 4px solid #8ca044;
+}
+
+.posicao {
+  font-weight: bold;
+  width: 60px;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.legenda-classificacao {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid #2a2a2a;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #CCCCCC;
+  font-size: 0.85rem;
+}
+
+.legenda-marker {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 3px;
+}
+
+.legenda-marker.ouro { 
+  background: #FFD700; 
+}
+
+.legenda-marker.prata { 
+  background: #8ca044; 
+}
+
 .secao-jogos {
   margin-top: 2rem;
   background-color: var(--bs-tertiary-bg);
@@ -150,41 +140,20 @@
   padding: 1.5rem;
 }
 
-/* Garantir separação visual entre o cartão de Jogos e o cartão de Classificação */
-.card.mb-4 {
-  /* reafirmar fundo e sombra do cartão de jogos */
-  background-color: #1E1E1E !important;
-  box-shadow: none !important;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-}
-
 .separador-classificacao {
   margin-top: 2rem !important;
   padding-top: 0.75rem;
   border-top: 3px solid rgba(255,255,255,0.03);
-  background-color: #1E1E1E !important;
 }
 
-.card.mt-5.separador-classificacao {
-  border-radius: 12px;
-}
-
-/* Tabs (Jogos Recentes / Próximos Jogos) */
 .nav-tabs {
-  border-bottom: 1px solid #2a2a2a;
-  padding: 0 1rem;
-  background-color: transparent;
+  border-bottom: 1px solid #333;
 }
 
 .nav-tabs .nav-link {
-  color: #999;
+  color: #CCCCCC;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background-color: transparent;
 }
 
 .nav-tabs .nav-link.active {
@@ -194,22 +163,18 @@
 }
 
 .nav-tabs .nav-link:hover {
-  color: #fff;
+  color: #FFFFFF;
   border-bottom-color: transparent;
-  background-color: transparent;
 }
 
-/* Tab content */
 .tab-content {
   background-color: transparent;
 }
 
-/* Remover padding extra do card-body quando há tabs */
 .card-body:has(.nav-tabs) {
   padding-bottom: 0;
 }
 
-/* Card header com tabs */
 .card-header:has(.nav-tabs) {
   padding-bottom: 0;
 }
@@ -220,4 +185,11 @@
   margin-right: -1.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .jogo-destaque {
+    width: 100%;
+    margin-top: 1rem;
+  }
 }

@@ -1,1 +1,1 @@
-Repositório para o projeto final da unidade curricular de Desenvolvimento para Web
+Projeto Final "ViveDistrital" para a unidade curricular de Desenvolvimento para Web.

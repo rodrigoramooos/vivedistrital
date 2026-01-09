@@ -18,11 +18,5 @@
   <!-- CSS específico da página -->
   <link rel="stylesheet" href="<?php echo url($pageCSS); ?>">
   <?php endif; ?>
-  
-  <?php if (isset($additionalStyles)): ?>
-  <style>
-    <?php echo $additionalStyles; ?>
-  </style>
-  <?php endif; ?>
 </head>
 <body>

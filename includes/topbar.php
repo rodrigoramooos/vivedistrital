@@ -1,4 +1,3 @@
-<!-- Barra Superior com autenticação -->
 <div class="top-bar d-flex justify-content-between align-items-center flex-wrap gap-3">
   <div class="search-box flex-grow-1 position-relative">
     <input type="text" id="searchInput" placeholder="Pesquise pela equipa..." autocomplete="off">
@@ -8,7 +7,6 @@
     <?php if (isLoggedIn()): ?>
       <?php $loggedUser = getLoggedUser(); ?>
       
-      <!-- Menu do Utilizador -->
       <div class="dropdown user-dropdown-wrapper">
         <button class="user-menu-btn" type="button" id="userMenuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fas fa-user"></i>
@@ -18,7 +16,7 @@
         <div class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userMenuDropdown">
           <div class="user-menu-list">
             <?php if (isAdmin()): ?>
-            <a href="<?php echo url('admin.php'); ?>" class="user-menu-item" style="text-decoration: none;">
+            <a href="<?php echo url('admin/admin.php'); ?>" class="user-menu-item" style="text-decoration: none;">
               <i class="fas fa-shield-alt"></i>
               <div class="user-menu-item-content">
                 <strong>Painel Admin</strong>
@@ -36,7 +34,6 @@
         </div>
       </div>
     <?php else: ?>
-      <!-- Botões de Login e Registo (não logado) -->
       <div class="d-flex gap-2">
         <a href="<?php echo url('login.php'); ?>" class="btn btn-primary">
           <i class="fas fa-sign-in-alt"></i> Login
@@ -56,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let searchTimeout;
     let currentFocus = -1;
 
-    // Função para pesquisar clubes
     function pesquisarClubes(termo) {
         if (termo.length < 2) {
             searchResults.innerHTML = '';
@@ -64,7 +60,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Fazer requisição AJAX
         fetch('<?php echo url('api/pesquisar-clubes.php'); ?>?q=' + encodeURIComponent(termo))
             .then(response => response.json())
             .then(data => {
@@ -77,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    // Função para mostrar resultados
     function mostrarResultados(clubes) {
         if (clubes.length === 0) {
             searchResults.innerHTML = '<div class="search-item no-results">Nenhum clube encontrado</div>';
@@ -103,18 +97,15 @@ document.addEventListener('DOMContentLoaded', function() {
         currentFocus = -1;
     }
 
-    // Event listener para input
     searchInput.addEventListener('input', function(e) {
         clearTimeout(searchTimeout);
         const termo = e.target.value.trim();
         
-        // Debounce: esperar 300ms após parar de digitar
         searchTimeout = setTimeout(() => {
             pesquisarClubes(termo);
         }, 300);
     });
 
-    // Fechar resultados ao clicar fora
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.classList.remove('show');
@@ -122,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Navegação por teclado (setas e Enter)
     searchInput.addEventListener('keydown', function(e) {
         const items = searchResults.getElementsByClassName('search-item');
         
@@ -145,7 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Adicionar classe active ao item selecionado
     function addActive(items) {
         if (!items || items.length === 0) return;
         removeActive(items);
@@ -156,14 +145,12 @@ document.addEventListener('DOMContentLoaded', function() {
         items[currentFocus].classList.add('active');
     }
 
-    // Remover classe active de todos os itens
     function removeActive(items) {
         for (let i = 0; i < items.length; i++) {
             items[i].classList.remove('active');
         }
     }
 
-    // Mostrar resultados ao focar no input (se já tiver texto)
     searchInput.addEventListener('focus', function() {
         if (searchInput.value.trim().length >= 2) {
             pesquisarClubes(searchInput.value.trim());

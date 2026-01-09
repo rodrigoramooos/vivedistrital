@@ -1,0 +1,148 @@
+body {
+  background: #0D0D0D;
+  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f1c40f;
+}
+
+.admin-header h1 {
+  color: #f1c40f;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.btn-voltar {
+  background: #2a2a2a;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-voltar:hover {
+  background: #3a3a3a;
+  color: #f1c40f;
+}
+
+.users-table {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 2rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  color: #f1c40f;
+  font-weight: 700;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #3a3a3a;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #2a2a2a;
+  color: #ccc;
+}
+
+tr:hover {
+  background: #2a2a2a;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin: 2px;
+}
+
+.badge-admin {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.badge-jornalista {
+  background: #3498db;
+  color: #fff;
+}
+
+.badge-user {
+  background: #555;
+  color: #ccc;
+}
+
+.btn-toggle {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin: 2px;
+  transition: all 0.3s ease;
+}
+
+.btn-jornalista {
+  background: #3498db;
+  color: #fff;
+}
+
+.btn-jornalista:hover {
+  background: #2980b9;
+}
+
+.btn-admin {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-admin:hover {
+  background: #c0392b;
+}
+
+.btn-remove {
+  background: #555;
+  color: #fff;
+}
+
+.btn-remove:hover {
+  background: #666;
+}
+
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.alert-success {
+  background: rgba(46, 204, 113, 0.1);
+  border: 2px solid #2ecc71;
+  color: #2ecc71;
+}
