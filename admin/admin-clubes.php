@@ -53,7 +53,7 @@ $clubes = getClubes();
                 
                 <div class="clube-header">
                     <?php if (!empty($clube['logo']) && file_exists(__DIR__ . '/../' . $clube['logo'])): ?>
-                        <img src="<?= e($clube['logo']) ?>" alt="<?= e($clube['nome']) ?>">
+                        <img src="<?= e(url($clube['logo'])) ?>" alt="<?= e($clube['nome']) ?>">
                     <?php endif; ?>
                     <div>
                         <h3><?= e($clube['nome']) ?></h3>

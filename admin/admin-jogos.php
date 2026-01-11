@@ -134,13 +134,13 @@ $clubes = getClubes();
                 <div class="jogo-header">
                     <div class="jogo-info">
                         <?php if (!empty($jogo['clube_casa_logo']) && file_exists(__DIR__ . '/../' . $jogo['clube_casa_logo'])): ?>
-                            <img src="<?= e($jogo['clube_casa_logo']) ?>" alt="<?= e($jogo['clube_casa_nome']) ?>">
+                            <img src="<?= e(url($jogo['clube_casa_logo'])) ?>" alt="<?= e($jogo['clube_casa_nome']) ?>">
                         <?php endif; ?>
                         <strong><?= e($jogo['clube_casa_nome']) ?></strong>
                         <span class="versus">VS</span>
                         <strong><?= e($jogo['clube_fora_nome']) ?></strong>
                         <?php if (!empty($jogo['clube_fora_logo']) && file_exists(__DIR__ . '/../' . $jogo['clube_fora_logo'])): ?>
-                            <img src="<?= e($jogo['clube_fora_logo']) ?>" alt="<?= e($jogo['clube_fora_nome']) ?>">
+                            <img src="<?= e(url($jogo['clube_fora_logo'])) ?>" alt="<?= e($jogo['clube_fora_nome']) ?>">
                         <?php endif; ?>
                     </div>
                     <div>
