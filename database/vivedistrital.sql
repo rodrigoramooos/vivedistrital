@@ -11,7 +11,7 @@ CREATE TABLE clubes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     codigo VARCHAR(50) NOT NULL UNIQUE,
-    logo VARCHAR(255) DEFAULT 'imgs/equipas/default.png',
+    logo VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_codigo (codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

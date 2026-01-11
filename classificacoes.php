@@ -1,19 +1,19 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-require_once 'includes/config.php';
-require_once 'config-clubes.php';
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/config-clubes.php';
 
 $pageTitle = 'Classificações';
 $pageCSS = 'css/classificacoes.css';
 
 $clubes = getClubes();
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/sidebar.php';
 ?>
 
 <div class="main-content">
-  <?php include 'includes/topbar.php'; ?>
+  <?php include __DIR__ . '/includes/topbar.php'; ?>
 
   <div class="card">
     <div class="card-header">
@@ -50,7 +50,9 @@ include 'includes/sidebar.php';
               <td><?= $posicao ?>º</td>
               <td>
                 <a href="<?= url('clube-detalhe.php?id=' . e($clube['codigo'])) ?>" class="equipa-row">
-                  <img src="<?= url(e($clube['logo'])) ?>" onerror="this.src='<?= url('imgs/equipas/default.png') ?>'">
+                  <?php if (!empty($clube['logo']) && file_exists(__DIR__ . '/' . $clube['logo'])): ?>
+                    <img src="<?= url(e($clube['logo'])) ?>">
+                  <?php endif; ?>
                   <span><?= e($clube['nome']) ?></span>
                 </a>
               </td>

@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/config.php';
+require_once __DIR__ . '/includes/config.php';
 header('Content-Type: text/html; charset=utf-8');
 
 $pageTitle = 'Notícias';
@@ -7,12 +7,12 @@ $pageCSS = 'css/noticias.css';
 
 $noticias = getNoticias();
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/sidebar.php';
 ?>
 
 <div class="main-content">
-  <?php include 'includes/topbar.php'; ?>
+  <?php include __DIR__ . '/includes/topbar.php'; ?>
 
   <?php if (canManageNoticias()): ?>
     <div class="mb-3">

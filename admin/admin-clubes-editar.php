@@ -3,13 +3,13 @@ require_once __DIR__ . '/../includes/config.php';
 
 // Verificar se utilizador é admin
 if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
-    header('Location: index.php');
+    header('Location: ' . url('login.php'));
     exit;
 }
 
 // Verificar se é POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: admin-clubes.php');
+    header('Location: ' . url('admin/admin-clubes.php'));
     exit;
 }
 
@@ -77,6 +77,6 @@ try {
     $_SESSION['tipo_mensagem'] = 'danger';
 }
 
-header('Location: admin-clubes.php');
+header('Location: ' . url('admin/admin-clubes.php'));
 exit;
 ?>

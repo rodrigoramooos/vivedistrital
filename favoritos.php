@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/config.php';
-require_once 'config-clubes.php';
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/config-clubes.php';
 
 $pageTitle = 'Jogos';
 $pageCSS = 'css/favoritos.css';
@@ -47,12 +47,12 @@ if ($clube_id) {
     $resultadosRecentes = $stmt->fetchAll();
 }
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/sidebar.php';
 ?>
 
 <div class="main-content">
-  <?php include 'includes/topbar.php'; ?>
+  <?php include __DIR__ . '/includes/topbar.php'; ?>
 
   <?php if (!$clube_info): ?>
     <div class="empty-state">

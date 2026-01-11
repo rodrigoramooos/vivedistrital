@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 require_once __DIR__ . '/../config-clubes.php';
 
 if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
-    header('Location: index.php');
+    header('Location: ' . url('login.php'));
     exit;
 }
 
@@ -32,7 +32,7 @@ $clubes = getClubes();
 </head>
 <body>
     <div class="admin-container">
-        <a href="admin.php" class="back-link">
+        <a href="<?= url('admin/admin.php') ?>" class="back-link">
             <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
         </a>
 
@@ -48,11 +48,13 @@ $clubes = getClubes();
         <?php endif; ?>
 
         <?php foreach ($clubes as $clube): ?>
-            <form method="POST" action="admin-clubes-editar.php" class="clube-card">
+            <form method="POST" action="<?= url('admin/admin-clubes-editar.php') ?>" class="clube-card">
                 <input type="hidden" name="id" value="<?= $clube['id'] ?>">
                 
                 <div class="clube-header">
-                    <img src="<?= e($clube['logo']) ?>" alt="<?= e($clube['nome']) ?>" onerror="this.src='../imgs/equipas/<?= strtolower($clube['codigo']) ?>.png'">
+                    <?php if (!empty($clube['logo']) && file_exists(__DIR__ . '/../' . $clube['logo'])): ?>
+                        <img src="<?= e($clube['logo']) ?>" alt="<?= e($clube['nome']) ?>">
+                    <?php endif; ?>
                     <div>
                         <h3><?= e($clube['nome']) ?></h3>
                         <small style="color: #999;">Código: <?= e($clube['codigo']) ?></small>

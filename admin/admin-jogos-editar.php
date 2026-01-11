@@ -2,12 +2,12 @@
 require_once __DIR__ . '/../includes/config.php';
 
 if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
-    header('Location: index.php');
+    header('Location: ' . url('login.php'));
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_GET['action'])) {
-    header('Location: admin-jogos.php');
+    header('Location: ' . url('admin/admin-jogos.php'));
     exit;
 }
 
@@ -25,7 +25,7 @@ try {
             $_SESSION['tipo_mensagem'] = 'success';
         }
         
-        header('Location: admin-jogos.php');
+        header('Location: ' . url('admin/admin-jogos.php'));
         exit;
     }
     
@@ -95,6 +95,6 @@ try {
     $_SESSION['tipo_mensagem'] = 'danger';
 }
 
-header('Location: admin-jogos.php');
+header('Location: ' . url('admin/admin-jogos.php'));
 exit;
 ?>

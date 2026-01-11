@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
-require_once 'includes/config.php';
-require_once 'config-clubes.php';
+require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/config-clubes.php';
 
 $pageTitle = 'Detalhes do Clube';
 $pageCSS = 'css/clube.css';
@@ -25,12 +25,12 @@ $golos_sofridos = $clube['golos_sofridos'] ?? 0;
 $diferenca_golos = $golos_marcados - $golos_sofridos;
 $posicao = getPosicao($clube['codigo']);
 
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include __DIR__ . '/includes/header.php';
+include __DIR__ . '/includes/sidebar.php';
 ?>
 
 <div class="main-content">
-  <?php include 'includes/topbar.php'; ?>
+  <?php include __DIR__ . '/includes/topbar.php'; ?>
 
   <div class="club-header">
     <div class="club-logo">

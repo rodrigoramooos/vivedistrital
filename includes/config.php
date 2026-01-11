@@ -4,21 +4,30 @@ session_start();
 define('SITE_NAME', 'Vive Distrital');
 define('BASE_URL', '/vivedistrital/');
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'vivedistrital');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+$DB_HOST = "127.0.0.1";
+$DB_NAME = "vivedistrital";
+$DB_USER = "vivedb";
+$DB_PASS = "vivedb123";
 
-$pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false
-]);
-$pdo->exec("SET NAMES utf8mb4");
-$pdo->exec("SET CHARACTER SET utf8mb4");
+try {
+    $pdo = new PDO(
+        "mysql:host={$DB_HOST};dbname={$DB_NAME};charset=utf8mb4",
+        $DB_USER,
+        $DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]
+    );
+    
+} catch (Exception $e) {
+    echo $e->getMessage();
+    exit;
+}
 
 function url($path = '') {
-    return BASE_URL . $path;
+    return BASE_URL . ltrim($path, '/');
 }
 
 function isActive($page) {

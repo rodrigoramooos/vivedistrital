@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../config-clubes.php';
 
 if (!isset($_SESSION['user_id']) || !$_SESSION['is_admin']) {
-    header('Location: index.php');
+    header('Location: ' . url('login.php'));
     exit;
 }
 
@@ -35,7 +35,7 @@ $clubes = getClubes();
 </head>
 <body>
     <div class="admin-container">
-        <a href="admin.php" class="back-link">
+        <a href="<?= url('admin/admin.php') ?>" class="back-link">
             <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
         </a>
 
@@ -58,7 +58,7 @@ $clubes = getClubes();
         <?php endif; ?>
 
         <div id="novo-jogo-form" class="jogo-card" style="border-color: #27ae60;">
-            <form method="POST" action="admin-jogos-editar.php">
+            <form method="POST" action="<?= url('admin/admin-jogos-editar.php') ?>">
                 <input type="hidden" name="action" value="add">
                 
                 <h3 style="color: #27ae60; margin-bottom: 20px;">
@@ -127,23 +127,27 @@ $clubes = getClubes();
         </h3>
 
         <?php foreach ($jogos as $jogo): ?>
-            <form method="POST" action="admin-jogos-editar.php" class="jogo-card">
+            <form method="POST" action="<?= url('admin/admin-jogos-editar.php') ?>" class="jogo-card">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="id" value="<?= $jogo['id'] ?>">
                 
                 <div class="jogo-header">
                     <div class="jogo-info">
-                        <img src="<?= e($jogo['clube_casa_logo']) ?>" alt="<?= e($jogo['clube_casa_nome']) ?>" onerror="this.src='../imgs/equipas/<?= strtolower($jogo['clube_casa_codigo']) ?>.png'">
+                        <?php if (!empty($jogo['clube_casa_logo']) && file_exists(__DIR__ . '/../' . $jogo['clube_casa_logo'])): ?>
+                            <img src="<?= e($jogo['clube_casa_logo']) ?>" alt="<?= e($jogo['clube_casa_nome']) ?>">
+                        <?php endif; ?>
                         <strong><?= e($jogo['clube_casa_nome']) ?></strong>
                         <span class="versus">VS</span>
                         <strong><?= e($jogo['clube_fora_nome']) ?></strong>
-                        <img src="<?= e($jogo['clube_fora_logo']) ?>" alt="<?= e($jogo['clube_fora_nome']) ?>" onerror="this.src='../imgs/equipas/<?= strtolower($jogo['clube_fora_codigo']) ?>.png'">
+                        <?php if (!empty($jogo['clube_fora_logo']) && file_exists(__DIR__ . '/../' . $jogo['clube_fora_logo'])): ?>
+                            <img src="<?= e($jogo['clube_fora_logo']) ?>" alt="<?= e($jogo['clube_fora_nome']) ?>">
+                        <?php endif; ?>
                     </div>
                     <div>
                         <span class="status-badge status-<?= $jogo['status'] ?>">
                             <?= ucfirst($jogo['status']) ?>
                         </span>
-                        <button type="button" class="btn-delete" onclick="if(confirm('Tem certeza que deseja eliminar este jogo?')) { this.form.action='admin-jogos-editar.php?action=delete&id=<?= $jogo['id'] ?>'; this.form.submit(); }">
+                        <button type="button" class="btn-delete" onclick="if(confirm('Tem certeza que deseja eliminar este jogo?')) { this.form.action='<?= url('admin/admin-jogos-editar.php?action=delete&id=' . $jogo['id']) ?>'; this.form.submit(); }">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
