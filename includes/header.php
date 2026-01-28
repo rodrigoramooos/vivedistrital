@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo isset($pageTitle) ? $pageTitle . ' - ' : ''; ?>Vive Distrital</title>
+  <title><?php echo isset($pageTitle) ? $pageTitle . ' - ' : ''; ?>Vive Distrital</title> <!-- echo isset para mostrar o título da página se definido -->
+  
+  <!-- Icone do browser (separador) -->
+  <link rel="icon" type="image/png" href="/vivedistrital/imgs/logos/Logo-ViveDistrital-LetrasBrancas.png">
   
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,11 +15,17 @@
   <!-- Google Material Symbols -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <!-- CSS comum -->
-  <link rel="stylesheet" href="<?php echo url('css/comum.css'); ?>">
+  <link rel="stylesheet" href="/vivedistrital/css/comum.css">
   
   <?php if (isset($pageCSS)): ?>
   <!-- CSS específico da página -->
-  <link rel="stylesheet" href="<?php echo url($pageCSS); ?>">
+  <link rel="stylesheet" href="<?php echo $pageCSS; ?>">
+  <?php endif; ?>
+  
+  <?php if (isset($additionalStyles)): ?>
+  <style>
+    <?php echo $additionalStyles; ?>
+  </style>
   <?php endif; ?>
 </head>
 <body>

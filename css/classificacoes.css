@@ -1,3 +1,5 @@
+/* ===== ESTILOS ESPECÍFICOS PARA PÁGINA DE CLASSIFICAÇÕES ===== */
+
 .card {
   background-color: #1A1A1A;
   border: none;
@@ -48,6 +50,12 @@
 .table-dark tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
+
+/* Destaque para posições especiais na tabela */
+/* 1º lugar - Ouro, através de nth-child */
+/* 2º lugar - Prata, através de nth-child */
+/* 14º lugar - Playoff de descida, através de nth-child */
+/* 15º e 16º lugar - Descida direta, através de nth-child */
 
 .table-dark tbody tr:nth-child(1) {
   background-color: rgba(255, 215, 0, 0.1);
@@ -129,6 +137,7 @@
   color: #FFFFFF;
 }
 
+/* Legenda da classificação */
 .legenda-classificacao {
   margin-top: 1.5rem;
   padding-top: 1rem;

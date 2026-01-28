@@ -1,9 +1,13 @@
+/* ===== ESTILOS ESPECÍFICOS PARA PÁGINAS ADMIN ===== */
+
+/* Container Principal Admin */
 .admin-container {
     max-width: 1400px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
+/* Cabeçalho Admin */
 .admin-header {
     background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
     color: #000;
@@ -26,6 +30,7 @@
     color: #000;
 }
 
+/* Cards de Estatísticas */
 .stat-card {
     background-color: #1A1A1A;
     border-radius: 12px;
@@ -83,6 +88,7 @@
     margin: 0.5rem 0 0 0;
 }
 
+/* Ações Rápidas */
 .quick-actions {
     background-color: #1A1A1A;
     border-radius: 12px;
@@ -102,6 +108,7 @@
     margin: 0.5rem 0.5rem 0.5rem 0;
 }
 
+/* Back Link */
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -118,6 +125,7 @@
     gap: 0.75rem;
 }
 
+/* Clube Card */
 .clube-card {
     background: #1A1A1A;
     border-radius: 15px;
@@ -153,6 +161,7 @@
     font-size: 1.5rem;
 }
 
+/* Form Row */
 .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -203,6 +212,7 @@
     outline: none;
 }
 
+/* Jogo Card */
 .jogo-card {
     background: #1A1A1A;
     border-radius: 15px;
@@ -243,6 +253,7 @@
     font-weight: 600;
 }
 
+/* Status Badge */
 .status-badge {
     padding: 0.4rem 1rem;
     border-radius: 20px;
@@ -266,6 +277,7 @@
     color: #e74c3c;
 }
 
+/* Status Badge */
 .status-badge {
     padding: 0.4rem 1rem;
     border-radius: 20px;
@@ -291,6 +303,7 @@
     color: #e74c3c;
 }
 
+/* Verso */
 .versus {
     color: #f1c40f;
     font-weight: 700;
@@ -324,6 +337,7 @@
     color: #fff;
 }
 
+/* Botões Admin */
 .btn-save {
     background: #27ae60;
     color: white;
@@ -372,6 +386,7 @@
     color: #f1c40f;
 }
 
+/* Tabela de Usuários */
 .user-table {
     width: 100%;
     border-collapse: separate;
@@ -402,6 +417,7 @@
     border: none;
 }
 
+/* Badge */
 .badge {
     padding: 0.35rem 0.75rem;
     border-radius: 12px;
@@ -419,6 +435,7 @@
     color: #95a5a6;
 }
 
+/* Mensagens */
 .alert {
     padding: 1rem 1.5rem;
     border-radius: 8px;
@@ -437,6 +454,7 @@
     color: #e74c3c;
 }
 
+/* Tabelas */
 .table-container {
     background-color: #1A1A1A;
     border-radius: 12px;

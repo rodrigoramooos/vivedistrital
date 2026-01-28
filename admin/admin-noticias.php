@@ -2,26 +2,34 @@
 require_once __DIR__ . '/../includes/config.php';
 header('Content-Type: text/html; charset=utf-8');
 
+// Verificar permissões, se pode gerir notícias, se não, redireciona para a página inicial
 if (!canManageNoticias()) {
-    header('Location: ' . url('index.php'));
+    header('Location: /vivedistrital/index.php');
     exit;
 }
 
+// Obter todas as notícias
 $noticias = getNoticias();
 
 $pageTitle = 'Gerir Notícias';
-$pageCSS = 'css/admin-noticias.css';
 include __DIR__ . '/../includes/header.php';
 ?>
 
+<!-- CSS Específico -->
+<link rel="stylesheet" href="/vivedistrital/css/comum.css">
+<link rel="stylesheet" href="/vivedistrital/css/admin.css">
+<link rel="stylesheet" href="/vivedistrital/css/admin-noticias.css">
+
 <div class="admin-container">
+  <!-- Header -->
   <div class="admin-header">
-    <h1><i class="fas fa-newspaper"></i> Gerir Notícias</h1>
-    <a href="<?php echo url(isAdmin() ? 'admin/admin.php' : 'noticias.php'); ?>" class="btn-voltar">
+    <h1 style="color: #fff;">Gerir Notícias</h1>
+    <a href="<?php echo isAdmin() ? '/vivedistrital/admin/admin.php' : '/vivedistrital/noticias.php'; ?>" class="btn-voltar">
       <i class="fas fa-arrow-left"></i> Voltar
     </a>
   </div>
 
+  <!-- Mensagens -->
   <?php if (isset($_SESSION['mensagem'])): ?>
     <div class="alert alert-<?php echo $_SESSION['tipo_mensagem'] ?? 'info'; ?>">
       <?php 
@@ -32,19 +40,20 @@ include __DIR__ . '/../includes/header.php';
     </div>
   <?php endif; ?>
 
+  <!-- Formulário Nova Notícia -->
   <div class="nova-noticia-card">
     <h2><i class="fas fa-plus-circle"></i> Nova Notícia</h2>
-    <form method="POST" action="<?php echo url('admin/admin-noticias-editar.php'); ?>">
+    <form method="POST" action="/vivedistrital/admin/admin-noticias-editar.php">
       <input type="hidden" name="acao" value="criar">
       
       <div class="form-group">
         <label for="titulo">Título *</label>
-        <input type="text" id="titulo" name="titulo" required maxlength="255">
+        <input type="text" id="titulo" name="titulo" required maxlength="255" placeholder="Ex: União 1919 vence clássico distrital">
       </div>
 
       <div class="form-group">
         <label for="resumo">Conteúdo da Notícia *</label>
-        <textarea id="resumo" name="resumo" required></textarea>
+        <textarea id="resumo" name="resumo" required placeholder="Escreve aqui a notícia completa (notícias curtas, até 3-4 frases)"></textarea>
       </div>
 
       <button type="submit" class="btn-criar">
@@ -53,8 +62,9 @@ include __DIR__ . '/../includes/header.php';
     </form>
   </div>
 
+  <!-- Lista de Notícias Existentes -->
   <div class="noticias-list">
-    <h2><i class="fas fa-list"></i> Notícias Publicadas (<?php echo count($noticias); ?>)</h2>
+    <h2><i class="fas fa-list"></i> Notícias Publicadas (<?php echo count($noticias); // echo count serve para mostrar o número total de notícias ?>)</h2>
 
     <?php if (empty($noticias)): ?>
       <p style="color: #888; text-align: center; padding: 2rem;">Ainda não há notícias publicadas.</p>
@@ -65,13 +75,14 @@ include __DIR__ . '/../includes/header.php';
         <div class="noticia-item" id="noticia-<?php echo $noticia['id']; ?>">
           <div class="noticia-header">
             <h3 class="noticia-titulo">
+              <i class="fas <?php echo $icon; ?>"></i>
               <?php echo htmlspecialchars($noticia['titulo']); ?>
             </h3>
             <div class="noticia-actions">
               <button class="btn-editar" onclick="toggleEdit(<?php echo $noticia['id']; ?>)">
                 <i class="fas fa-edit"></i> Editar
               </button>
-              <form method="POST" action="<?php echo url('admin/admin-noticias-editar.php'); ?>" style="display: inline;" onsubmit="return confirm('Tens a certeza que queres apagar esta notícia?');">
+              <form method="POST" action="/vivedistrital/admin/admin-noticias-editar.php" style="display: inline;" onsubmit="return confirm('Tens a certeza que queres apagar esta notícia?');">
                 <input type="hidden" name="acao" value="apagar">
                 <input type="hidden" name="id" value="<?php echo $noticia['id']; ?>">
                 <button type="submit" class="btn-apagar">
@@ -89,8 +100,9 @@ include __DIR__ . '/../includes/header.php';
             <?php echo htmlspecialchars($noticia['resumo']); ?>
           </div>
 
+          <!-- Formulário de Edição (oculto por padrão) -->
           <div class="noticia-edit-form" id="edit-form-<?php echo $noticia['id']; ?>" style="display: none;">
-            <form method="POST" action="<?php echo url('admin/admin-noticias-editar.php'); ?>">
+            <form method="POST" action="/vivedistrital/admin/admin-noticias-editar.php">
               <input type="hidden" name="acao" value="editar">
               <input type="hidden" name="id" value="<?php echo $noticia['id']; ?>">
               
@@ -119,16 +131,14 @@ include __DIR__ . '/../includes/header.php';
 </div>
 
 <script>
-function toggleEdit(noticiaId) {
-  const form = document.getElementById('edit-form-' + noticiaId);
+function toggleEdit(noticiaId) { // Função para mostrar/ocultar o formulário de edição, toggleEdit
+  const form = document.getElementById('edit-form-' + noticiaId); // Seleciona o formulário pelo ID
   if (form.style.display === 'none') {
     form.style.display = 'block';
   } else {
-    form.style.display = 'none';
+    form.style.display = 'none'; // form.style.display serve para definir o estilo de exibição do formulário, neste caso, alternar entre 'block' e 'none'
   }
 }
 </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

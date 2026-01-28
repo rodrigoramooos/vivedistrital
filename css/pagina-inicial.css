@@ -1,3 +1,100 @@
+/* ===== ESTILOS ESPECÍFICOS PÁGINA INICIAL ===== */
+
+/* Banner Carousel */
+.banner-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.banner-wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.banner-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+  opacity: 0;
+}
+
+.banner-wrapper:hover .banner-nav {
+  opacity: 1;
+}
+
+.banner-nav:hover {
+  background-color: rgba(241, 196, 15, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-prev {
+  left: 15px;
+}
+
+.banner-next {
+  right: 15px;
+}
+
+.banner-nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Overlays clicáveis dos botões CTA nos banners */
+.banner-cta-overlay {
+  position: absolute;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+}
+
+/* Banner 2: Botão "CRIAR CONTA GRÁTIS" */
+#bannerButton2 {
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 230px;
+  height: 55px;
+}
+
+/* Banner 3: Botão "VER NOTÍCIAS" */
+#bannerButton3 {
+  top: 69%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 190px;
+  height: 52px;
+}
+
+/* Feedback visual ao hover (leve escurecimento) */
+.banner-cta-overlay:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.banner-cta-overlay:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Jogo em destaque */
 .jogo-destaque {
   display: flex;
   flex-direction: column;
@@ -51,16 +148,17 @@
   font-weight: bold;
 }
 
-.stat-amarelo {
-  background-color: var(--primary-accent);
-  color: #000;
-}
-
-.stat-azul {
-  background-color: #1e6aff;
+.stat-melhor {
+  background-color: #f1c40f;
   color: #fff;
 }
 
+.stat-pior {
+  background-color: #2450ca;
+  color: #fff;
+}
+
+/* Botão Ver Mais */
 .btn-ver-mais {
   background: none;
   border: 1px solid rgba(241,196,15,0.15);
@@ -77,6 +175,7 @@
   color: #fff;
 }
 
+/* Classificação na página inicial */
 .tabela-classificacao.table-dark tbody tr:nth-child(1) {
   background-color: rgba(255, 215, 0, 0.1);
   border-left: 4px solid #FFD700;
@@ -94,6 +193,7 @@
   padding-left: 0.5rem;
 }
 
+/* Legenda da classificação */
 .legenda-classificacao {
   margin-top: 1rem;
   display: flex;
@@ -126,6 +226,7 @@
   background: #8ca044; 
 }
 
+/* Seções específicas */
 .secao-jogos {
   margin-top: 2rem;
   background-color: var(--bs-tertiary-bg);
@@ -146,6 +247,7 @@
   border-top: 3px solid rgba(255,255,255,0.03);
 }
 
+/* Tabs - override específico para página inicial */
 .nav-tabs {
   border-bottom: 1px solid #333;
 }
@@ -169,6 +271,33 @@
 
 .tab-content {
   background-color: transparent;
+  position: relative;
+}
+
+/* Transições animadas entre tabs */
+.tab-pane {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  display: none !important;
+}
+
+.tab-pane.active {
+  display: block !important;
+  animation: tabFadeIn 0.3s ease forwards;
+  pointer-events: auto;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-body:has(.nav-tabs) {
@@ -187,9 +316,132 @@
   padding-right: 1.5rem;
 }
 
+/* Hover informativo na classificação - Forma recente */
+.card:has(.tabela-classificacao) .table-responsive {
+  overflow: visible;
+}
+
+.tabela-classificacao tbody tr {
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tabela-classificacao tbody tr:hover {
+  background-color: rgba(241, 196, 15, 0.05);
+}
+
+.forma-recente-tooltip {
+  position: absolute;
+  top: 50%;
+  right: -250px;
+  transform: translateY(-50%);
+  background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+  border: 1px solid #f1c40f;
+  border-radius: 8px;
+  padding: 12px 16px;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(241, 196, 15, 0.2);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabela-classificacao tbody tr:hover .forma-recente-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(-5px);
+}
+
+.forma-recente-tooltip::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #f1c40f transparent transparent;
+}
+
+.forma-titulo {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.forma-jogos {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.forma-jogo {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.forma-jogo:hover {
+  transform: scale(1.15);
+}
+
+.forma-jogo.vitoria {
+  background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.forma-jogo.empate {
+  background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+  color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(241, 196, 15, 0.3);
+}
+
+.forma-jogo.derrota {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+/* Responsivo página inicial */
 @media (max-width: 768px) {
   .jogo-destaque {
     width: 100%;
     margin-top: 1rem;
+  }
+  
+  .forma-recente-tooltip {
+    right: auto;
+    left: 50%;
+    top: auto;
+    bottom: -90px;
+    transform: translateX(-50%);
+  }
+  
+  .tabela-classificacao tbody tr:hover .forma-recente-tooltip {
+    transform: translateX(-50%) translateY(5px);
+  }
+  
+  .forma-recente-tooltip::before {
+    left: 50%;
+    top: -8px;
+    transform: translateX(-50%);
+    border-width: 0 8px 8px 8px;
+    border-color: transparent transparent #2d2d2d transparent;
   }
 }

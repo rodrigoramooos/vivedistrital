@@ -3,34 +3,70 @@ require_once __DIR__ . '/includes/config.php';
 header('Content-Type: text/html; charset=utf-8');
 
 $pageTitle = 'Notícias';
-$pageCSS = 'css/noticias.css';
 
+// Obter notícias da base de dados
 $noticias = getNoticias();
 
 include __DIR__ . '/includes/header.php';
 include __DIR__ . '/includes/sidebar.php';
 ?>
 
+<style>
+  .card-noticia {
+    background-color: #1A1A1A;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+  }
+
+  .card-noticia h5 {
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-noticia p {
+    color: #999999;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+    }
+    .main-content {
+      margin-left: 0;
+      padding: 1rem;
+    }
+  }
+</style>
+
 <div class="main-content">
+  <!-- Barra Superior -->
   <?php include __DIR__ . '/includes/topbar.php'; ?>
 
+  <!-- Botão Gerir Notícias (apenas para admins e jornalistas) -->
   <?php if (canManageNoticias()): ?>
     <div class="mb-3">
-      <a href="<?php echo url('admin/admin-noticias.php'); ?>" class="btn btn-warning" style="background: #f1c40f; color: #000; border: none; font-weight: 600;">
+      <a href="/vivedistrital/admin/admin-noticias.php" class="btn btn-warning" style="background: #f1c40f; color: #000; border: none; font-weight: 600;">
         <i class="fas fa-edit"></i> Gerir Notícias
       </a>
     </div>
   <?php endif; ?>
 
+  <!-- Notícias -->
   <h4 class="mb-3" style="color: #fff; font-weight: 700;">Notícias Recentes</h4>
 
-  <?php if (empty($noticias)): ?>
+  <?php if (empty($noticias)): // empty é usado para verificar se a variável está vazia ?>
     <div class="card-noticia" style="text-align: center; padding: 3rem;">
       <i class="fas fa-newspaper" style="font-size: 3rem; color: #555; margin-bottom: 1rem;"></i>
       <p style="color: #888; font-size: 1.1rem;">Ainda não há notícias publicadas.</p>
     </div>
   <?php else: ?>
     <?php foreach ($noticias as $noticia): 
+      // Formatar data para português
       $data_formatada = date('d \d\e F \d\e Y', strtotime($noticia['data_publicacao']));
       $meses = [
         'January' => 'Janeiro', 'February' => 'Fevereiro', 'March' => 'Março',
@@ -38,19 +74,17 @@ include __DIR__ . '/includes/sidebar.php';
         'July' => 'Julho', 'August' => 'Agosto', 'September' => 'Setembro',
         'October' => 'Outubro', 'November' => 'Novembro', 'December' => 'Dezembro'
       ];
-      $data_formatada = str_replace(array_keys($meses), array_values($meses), $data_formatada);
+      $data_formatada = str_replace(array_keys($meses), array_values($meses), $data_formatada); // Substituir meses em inglês por português
     ?>
       <div class="card-noticia">
         <h5 class="mb-2">
-          <?php echo htmlspecialchars($noticia['titulo']); ?>
+          <i class="fa-solid fa-newspaper me-2 text-warning"></i><?php echo htmlspecialchars($noticia['titulo']); // htmlspecialchars é usado para escapar caracteres especiais e prevenir XSS ?>
         </h5>
         <p class="mb-2" style="color: #ccc; font-size: 1rem;"><?php echo htmlspecialchars($noticia['resumo']); ?></p>
-        <p class="mb-0">Publicado a <?php echo $data_formatada; ?> por <strong><?php echo htmlspecialchars($noticia['autor_nome']); ?></strong></p>
+        <p class="mb-0">Publicado a <?php echo $data_formatada; ?> por <strong><?php echo htmlspecialchars($noticia['autor_nome']); // autor_nome e autor_id vêm da base de dados ?></strong></p>
       </div>
     <?php endforeach; ?>
   <?php endif; ?>
 </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php include __DIR__ . '/includes/footer.php'; ?>

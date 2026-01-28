@@ -18,6 +18,7 @@ body {
   vertical-align: middle;
 }
 
+/* Sidebar */
 .sidebar {
   background-color: var(--sidebar-bg);
   padding: 2rem 1.5rem;
@@ -62,6 +63,7 @@ body {
   text-transform: uppercase;
 }
 
+/* Top Bar */
 .top-bar {
   background-color: var(--bs-tertiary-bg);
   border-radius: 8px;
@@ -87,6 +89,7 @@ body {
   color: #888;
 }
 
+/* ===== BOTÃO DE NOTIFICAÇÕES ===== */
 .notification-btn {
   width: 48px;
   height: 48px;
@@ -145,6 +148,7 @@ body {
   50% { box-shadow: 0 0 25px rgba(243, 156, 18, 0.9); }
 }
 
+/* ===== DROPDOWN DE NOTIFICAÇÕES ===== */
 .notification-dropdown-wrapper .dropdown-menu {
   margin-top: 0.75rem;
 }
@@ -363,6 +367,7 @@ body {
   transform: scale(1.2);
 }
 
+/* ===== MENU DO UTILIZADOR ===== */
 .user-dropdown-wrapper .user-menu-btn,
 button.user-menu-btn {
   background: #f1c40f !important;
@@ -422,6 +427,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   transform: rotate(180deg);
 }
 
+/* ===== DROPDOWN DO UTILIZADOR ===== */
 .user-dropdown-wrapper .dropdown-menu {
   margin-top: 0.75rem !important;
 }
@@ -598,6 +604,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   font-size: 0.875rem;
 }
 
+/* ===== DROPDOWN DE PESQUISA ===== */
 .search-results {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -692,6 +699,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   background-color: transparent;
 }
 
+/* Scrollbar personalizada para resultados de pesquisa */
 .search-results::-webkit-scrollbar {
   width: 8px;
 }
@@ -710,6 +718,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   background: #333;
 }
 
+/* ===== CARDS COMUNS ===== */
 .card {
   background-color: #1A1A1A;
   border: none;
@@ -759,6 +768,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   font-size: 0.9rem;
 }
 
+/* ===== TABELAS COMUNS ===== */
 .table-dark {
   color: #FFFFFF;
   background-color: transparent !important;
@@ -788,6 +798,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
+/* ===== EQUIPA ROW (usada em várias páginas) ===== */
 .equipa-row {
   display: flex;
   align-items: center;
@@ -809,6 +820,7 @@ button.user-menu-btn[aria-expanded="true"] i:last-child {
   object-fit: contain;
 }
 
+/* ===== FORMA RECENTE (V/E/D) ===== */
 .forma {
   display: flex;
   gap: 0.3rem;

@@ -3,13 +3,14 @@ require_once __DIR__ . '/../includes/config.php';
 
 // Verificar se é admin
 if (!isLoggedIn() || !isAdmin()) {
-    header('Location: ' . url('login.php'));
+    header('Location: /vivedistrital/login.php');
     exit;
 }
 
-$message = '';
+$message = ''; // Mensagem de feedback
 $messageType = '';
 
+// Processar atualização de classificação
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_classificacao') {
     $clube_id = $_POST['clube_id'];
     $posicao = $_POST['posicao'];
@@ -20,27 +21,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $golos_marcados = $_POST['golos_marcados'];
     $golos_sofridos = $_POST['golos_sofridos'];
     
+    // Calcular diferença de golos e pontos
     $diferenca_golos = $golos_marcados - $golos_sofridos;
-    $pontos = ($vitorias * 3) + $empates;
+    $pontos = ($vitorias * 3) + $empates; 
     
-    $stmt = $pdo->prepare("SELECT id FROM classificacoes WHERE clube_id = ?");
-    $stmt->execute([$clube_id]);
-    $exists = $stmt->fetch();
-    
-    if ($exists) {
-        $stmt = $pdo->prepare("UPDATE classificacoes SET posicao = ?, jogos = ?, vitorias = ?, empates = ?, derrotas = ?, golos_marcados = ?, golos_sofridos = ?, diferenca_golos = ?, pontos = ? WHERE clube_id = ?");
-        $stmt->execute([$posicao, $jogos, $vitorias, $empates, $derrotas, $golos_marcados, $golos_sofridos, $diferenca_golos, $pontos, $clube_id]);
-    } else {
-        $stmt = $pdo->prepare("INSERT INTO classificacoes (clube_id, posicao, jogos, vitorias, empates, derrotas, golos_marcados, golos_sofridos, diferenca_golos, pontos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$clube_id, $posicao, $jogos, $vitorias, $empates, $derrotas, $golos_marcados, $golos_sofridos, $diferenca_golos, $pontos]);
+    try {
+        // Verificar se já existe registo
+        $stmt = $pdo->prepare("SELECT id FROM classificacoes WHERE clube_id = ?");
+        $stmt->execute([$clube_id]); // Executa a query preparada, passando o clube_id como parâmetro
+        $exists = $stmt->fetch(); // Verifica se existe registo para este clube
+        
+        if ($exists) {
+            // Atualizar
+            $stmt = $pdo->prepare("
+                UPDATE classificacoes 
+                SET posicao = ?, jogos = ?, vitorias = ?, empates = ?, derrotas = ?, 
+                    golos_marcados = ?, golos_sofridos = ?, diferenca_golos = ?, pontos = ?
+                WHERE clube_id = ?
+            ");
+            $stmt->execute([$posicao, $jogos, $vitorias, $empates, $derrotas, $golos_marcados, $golos_sofridos, $diferenca_golos, $pontos, $clube_id]);
+        } else {
+            // Inserir
+            $stmt = $pdo->prepare("
+                INSERT INTO classificacoes (clube_id, posicao, jogos, vitorias, empates, derrotas, golos_marcados, golos_sofridos, diferenca_golos, pontos)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+            $stmt->execute([$clube_id, $posicao, $jogos, $vitorias, $empates, $derrotas, $golos_marcados, $golos_sofridos, $diferenca_golos, $pontos]);
+        }
+        
+        $message = 'Classificação atualizada com sucesso!';
+        $messageType = 'success';
+    } catch (PDOException $e) {
+        $message = 'Erro ao atualizar classificação: ' . $e->getMessage();
+        $messageType = 'danger';
     }
-    
-    $message = 'Classificação atualizada!';
-    $messageType = 'success';
 }
 
-$stmt = $pdo->query("SELECT c.id, c.nome, c.codigo, c.logo, cl.posicao, cl.jogos, cl.vitorias, cl.empates, cl.derrotas, cl.golos_marcados, cl.golos_sofridos, cl.diferenca_golos, cl.pontos FROM clubes c LEFT JOIN classificacoes cl ON c.id = cl.clube_id ORDER BY cl.posicao ASC, cl.pontos DESC");
-$clubes = $stmt->fetchAll();
+// Obter todos os clubes com suas classificações
+// IFNULL é usado para garantir que, se não houver classificação, os valores padrão sejam 0
+// LEFT JOIN é usado para incluir todos os clubes, mesmo que não tenham classificação
+// cl.posicao ASC para ordenar do 1º ao último, DESC para pontos, e c.nome a aparecer em ordem alfabética se houver empate
+try {
+    $stmt = $pdo->query("
+        SELECT c.id, c.nome, c.codigo, c.logo,
+               IFNULL(cl.posicao, 0) as posicao,
+               IFNULL(cl.jogos, 0) as jogos,
+               IFNULL(cl.vitorias, 0) as vitorias,
+               IFNULL(cl.empates, 0) as empates,
+               IFNULL(cl.derrotas, 0) as derrotas,
+               IFNULL(cl.golos_marcados, 0) as golos_marcados,
+               IFNULL(cl.golos_sofridos, 0) as golos_sofridos,
+               IFNULL(cl.diferenca_golos, 0) as diferenca_golos,
+               IFNULL(cl.pontos, 0) as pontos
+        FROM clubes c
+        LEFT JOIN classificacoes cl ON c.id = cl.clube_id
+        ORDER BY cl.posicao ASC, cl.pontos DESC, c.nome ASC
+    ");
+    $clubes = $stmt->fetchAll();
+} catch (PDOException $e) {
+    $clubes = [];
+    $message = 'Erro ao carregar clubes: ' . $e->getMessage();
+    $messageType = 'danger';
+}
 
 $pageTitle = 'Gestão de Classificações';
 ?>
@@ -55,8 +97,8 @@ $pageTitle = 'Gestão de Classificações';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo url('css/comum.css'); ?>">
-    <link rel="stylesheet" href="<?php echo url('css/admin.css'); ?>">
+    <link rel="stylesheet" href="/vivedistrital/css/comum.css">
+    <link rel="stylesheet" href="/vivedistrital/css/admin.css">
 </head>
 <body>
     <?php include __DIR__ . '/../includes/sidebar.php'; ?>
@@ -66,8 +108,9 @@ $pageTitle = 'Gestão de Classificações';
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h1><i class="fas fa-trophy"></i> Gestão de Classificações</h1>
+                    <p>Atualize as classificações dos clubes após cada jornada</p>
                 </div>
-                <a href="<?php echo url('admin/admin.php'); ?>" class="btn btn-dark">
+                <a href="/vivedistrital/admin/admin.php" class="btn btn-dark">
                     <i class="fas fa-arrow-left"></i> Voltar
                 </a>
             </div>
@@ -81,7 +124,10 @@ $pageTitle = 'Gestão de Classificações';
         <?php endif; ?>
         
         <div class="classificacao-table">
-            <h4><i class="fas fa-list-ol"></i> Classificações</h4>
+            <h4><i class="fas fa-list-ol"></i> Classificações - Editar</h4>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                <i class="fas fa-info-circle"></i> Os pontos são calculados automaticamente (Vitória = 3 pts, Empate = 1 pt)
+            </p>
             
             <div class="table-responsive">
                 <table class="table">
@@ -113,7 +159,7 @@ $pageTitle = 'Gestão de Classificações';
                                 </td>
                                 <td>
                                     <div class="clube-info">
-                                        <img src="<?php echo url($clube['logo']); ?>" alt="<?php echo $clube['nome']; ?>">
+                                        <img src="/vivedistrital/<?php echo $clube['logo']; ?>" alt="<?php echo $clube['nome']; ?>">
                                         <strong><?php echo htmlspecialchars($clube['nome']); ?></strong>
                                     </div>
                                 </td>
@@ -165,9 +211,7 @@ $pageTitle = 'Gestão de Classificações';
         </div>
     </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <?php include __DIR__ . '/../includes/footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
